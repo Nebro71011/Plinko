@@ -1,4 +1,3 @@
-
 var Engine = Matter.Engine,
   World = Matter.World,
   Events = Matter.Events,
@@ -76,17 +75,17 @@ function draw() {
   Engine.update(engine);
 
 if(gameState="PLAY"){
-  mousePressed();
+ // mousePressed();
   
    for (var i = 0; i < plinkos.length; i++) {
      
      plinkos[i].display();
      
    }
-   if(frameCount%60===0){
+  /* if(frameCount%60===0){
      particles.push(new Particle(random(width/2-30, width/2+30), 10,10));
      count++;
-   }
+   } */
  
   for (var j = 0; j < particles.length; j++) {
    
@@ -98,7 +97,7 @@ if(gameState="PLAY"){
    }
 
 
-   if (particle1=null)
+   if (particle!=null)
 {
   particle.display();
 
@@ -108,26 +107,45 @@ if(gameState="PLAY"){
     {
       score=score+500;
       particle=null;
-      }
-    }
-  }
+     
 
-  if(count===5){
+      }
+    
+    else if (particle.body.position.x < 600 && particle.body.position.x > 301 ) 
+              {
+                    score = score + 100;
+                    particle=null;
+                   
+
+              }
+              else if (particle.body.position.x < 900 && particle.body.position.x > 601 )
+              {
+                    score = score + 200;
+                    particle=null;
+                   
+
+              }   
+  }
+}
+
+ if(count>=5){
     gameState="END";
   }
 }
 
-if (gameState=="END"){
+if (gameState==="END"){
+
   textSize(30);
   text("GAME OVER",310,330);
-}
 
-   
+  
+}
+ 
 }
 
 function mousePressed(){
-  if (gameState!=="end"){
+  if (gameState!=="END"){
+    count++;
     particle=new Particle(mouseX,10,10,10,10);
   }
 }
-
